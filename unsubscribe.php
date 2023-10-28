@@ -1,5 +1,16 @@
 <?php
 
+if (!file_exists("fd-crm-20231028.csv")) {
+    $f = fopen("fd-crm-20231028.csv", "w");
+    $data = [
+        "EMail" => "EMail",
+        "Name" => "Name",
+        "Birthday" => "Birthday"
+    ];
+    fputcsv($f, $data);
+    fclose($f);
+}
+
 if (isset($_POST['email'])) {
     $email = $_POST['email'];
 
