@@ -10,8 +10,8 @@ if (isset($_POST['email'])) {
         }
     }
     file_put_contents("fd-crm-20231028.csv", implode("\n", $lines));
-    echo "You have been unsubscribed from our newsletter";
-
+    echo "You have been unsubscribed from our newsletter. Redirecting to homepage in 3 seconds...";
+    header("refresh:3;url=index.php");
 }
 
 ?>

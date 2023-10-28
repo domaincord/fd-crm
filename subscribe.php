@@ -27,7 +27,8 @@ if (isset($_POST['email'])) {
     fputcsv($f, $data);
     fclose($f);
 
-    echo "You have been subscribed to our newsletter";
+    echo "You have been subscribed to our newsletter. Redirecting to homepage in 3 seconds...";
+    header("refresh:3;url=index.php");
 }
 
 ?>

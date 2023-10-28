@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple CRM</title>
+    <title>Featured Domains</title>
+    <meta name="description" content="Curated, affordable domain names delivered to inbox every morning">
 </head>
 <style>
     html {
@@ -130,22 +131,21 @@
         <input type="email" name="email" id="email" placeholder="jdoe@example.com" />
 
         <label for="unsubscribe" class="container">Unsubscribe instead?
-            <input type="checkbox" name="unsubscribe" id="unsubscribe" <?php isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] === 'unsubscribe' ? "checked" : null  ?> />
+            <input type="checkbox" name="unsubscribe" id="unsubscribe" />
             <span class="checkmark"></span>
         </label>
+        
         <input type="submit" value="Subscribe" />
     </form>
 
     <script type="text/javascript">
         document.querySelector("#unsubscribe").addEventListener("change", function () {
-                if (this.checked) {
-                    this.form.action = "/unsubscribe.php";
-                    this.setAttribute("checked", "checked");
-                } else {
-                    this.form.action = "/subscribe.php";
-                    this.removeAttribute("checked");
-                }
-            });
+            if (this.checked) {
+                this.form.action = "/unsubscribe.php";
+            } else {
+                this.form.action = "/subscribe.php";
+            }
+        });
     </script>
 </body>
 
