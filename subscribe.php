@@ -4,7 +4,7 @@ if (isset($_POST['email'])) {
     $email = $_POST['email'];
     $name = isset($_POST['name']) ? $_POST['name'] : "";
     $bday = isset($_POST['birthday']) ? $_POST['birthday'] : "";
-    $file = fopen("crm.csv", "r");
+    $file = fopen("fd-crm-20231028.csv", "r");
 
     while (($column = fgetcsv($file, 10000, ",")) !== FALSE) {
         if ($column[0] == $email) {
@@ -14,7 +14,7 @@ if (isset($_POST['email'])) {
         }
     }
 
-    $f = fopen("crm.csv", "a");
+    $f = fopen("fd-crm-20231028.csv", "a");
 
     fputs($f, "\n");
 
