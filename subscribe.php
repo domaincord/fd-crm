@@ -18,6 +18,18 @@ if (isset($_POST['email'])) {
     $bday = isset($_POST['birthday']) ? $_POST['birthday'] : "";
     $file = fopen("fd-crm-20231028.csv", "r");
 
+    if (!preg_match("/^[a-zA-Z0-9\s]+$/", $name)) {
+        $name = preg_replace("/\W+/", "", $name);
+    }
+
+    if ($name > 16) {
+        $name = substr($name, 0, 16);
+    }
+
+    if ($bday >= 10 && preg_match("/^[0-9]{4}-[0-9]{2}-[0-9]{2}/", $bday)) {
+        $bday = substr($bday, 0, 10);
+    }
+
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         echo "Invalid email address";
         fclose($file);
@@ -26,7 +38,8 @@ if (isset($_POST['email'])) {
 
     while (($column = fgetcsv($file, 10000, ",")) !== FALSE) {
         if ($column[0] == $email) {
-            echo "You are already subscribed to our newsletter";
+            echo "You are already subscribed to our newsletter. Redirecting to homepage in 3 seconds...";
+            header("refresh:3;url=index.php");
             fclose($file);
             exit();
         }

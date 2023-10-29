@@ -139,13 +139,47 @@
     </form>
 
     <script type="text/javascript">
-        document.querySelector("#unsubscribe").addEventListener("change", function () {
-            if (this.checked) {
-                this.form.action = "/unsubscribe.php";
-            } else {
-                this.form.action = "/subscribe.php";
+        window.addEventListener("DOMContentLoaded", function() {
+            const queryString = new URLSearchParams(window.location.search)
+
+            const unsubscribe = queryString.get("unsubscribe");
+            const subscribe = queryString.get("subscribe");
+
+            if (unsubscribe === "1") {
+                document.querySelector("#unsubscribe").checked = true;
+
+                const form = document.querySelector("form");
+
+                form.action = "/unsubscribe.php";
+                form.querySelector("input[type='submit']").value = "Unsubscribe";
             }
-        });
+
+            const regex = new RegExp("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,10}$");
+
+            const email = queryString.get("email");
+
+            if (email && regex.test(email)) {
+                document.querySelector("#email").value = email;
+            }
+
+            if ((unsubscribe === "1" || subscribe === "1") && email && regex.test(email)) {
+                document.querySelector("form").submit();
+            }
+
+            document.querySelector("#unsubscribe").addEventListener("change", function () {
+                if (this.checked) {
+                    this.form.action = "/unsubscribe.php";
+                    this.form.querySelector("input[type='submit']").value = "Unsubscribe";
+                } else {
+                    this.form.action = "/subscribe.php";
+                    this.form.querySelector("input[type='submit']").value = "Subscribe";
+
+                    if (unsubscribe === "1") {
+                        window.history.replaceState({}, document.title, "/");
+                    }
+                }
+            });
+        })
     </script>
 </body>
 
