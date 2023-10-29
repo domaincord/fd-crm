@@ -22,11 +22,11 @@ if (isset($_POST['email'])) {
         $name = preg_replace("/\W+/", "", $name);
     }
 
-    if ($name > 16) {
+    if (strlen($name) > 16) {
         $name = substr($name, 0, 16);
     }
 
-    if ($bday >= 10 && preg_match("/^[0-9]{4}-[0-9]{2}-[0-9]{2}/", $bday)) {
+    if (strlen($bday) >= 10 && preg_match("/^[0-9]{4}-[0-9]{2}-[0-9]{2}/", $bday)) {
         $bday = substr($bday, 0, 10);
     }
 
