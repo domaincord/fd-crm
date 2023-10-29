@@ -17,7 +17,7 @@ if (isset($_POST['email'])) {
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $lines = file("fd-crm-20231028.csv", FILE_IGNORE_NEW_LINES);
         foreach ($lines as $key => $line) {
-            if (strpos($line, $email) !== false) {
+            if ($lines[$key] == $email) {
                 unset($lines[$key]);
             }
         }
