@@ -18,6 +18,12 @@ if (isset($_POST['email'])) {
     $bday = isset($_POST['birthday']) ? $_POST['birthday'] : "";
     $file = fopen("fd-crm-20231028.csv", "r");
 
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "Invalid email address";
+        fclose($file);
+        exit();
+    }
+
     while (($column = fgetcsv($file, 10000, ",")) !== FALSE) {
         if ($column[0] == $email) {
             echo "You are already subscribed to our newsletter";
